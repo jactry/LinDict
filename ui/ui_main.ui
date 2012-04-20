@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>477</width>
+    <height>379</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>477</width>
+    <height>379</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Lindict</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="youdao.qrc">
+    <normaloff>:/images/youdao.png</normaloff>:/images/youdao.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>查找</string>
+       </property>
+       <property name="icon">
+        <iconset resource="youdao.qrc">
+         <normaloff>:/images/youdao.png</normaloff>:/images/youdao.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="youdao.qrc"/>
+ </resources>
+ <connections/>
+</ui>

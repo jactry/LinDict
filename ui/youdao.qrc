@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="images">
+    <file>youdao.png</file>
+  </qresource>
+</RCC>
