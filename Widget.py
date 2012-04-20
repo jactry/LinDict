@@ -14,7 +14,7 @@ class Lin_Widget(QtGui.QWidget):
         QtGui.QWidget.__init__(self, parent)
     
         self.setGeometry(400,400,300,200)
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Popup)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setBackgroundRole(19)
 
         gl =QtGui.QGridLayout()
