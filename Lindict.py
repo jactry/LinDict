@@ -4,31 +4,31 @@
 import sys
 from PyQt4 import QtGui , QtCore
 from MainWindow import MainWindow
-from Widget import Lin_Widget
+from Widget import LinWidget
 
+class Lindict():
+   def __init__(self):
+      self.clipboard = QtGui.QApplication.clipboard()
+      self.mainwindow = MainWindow()
+      self.mainwindow.show()
+      self.widget = LinWidget()
+      self.clipboard.selectionChanged.connect(self.display_widget)
 
+      
+
+   def display_widget(self):
+      if self.mainwindow.real_time_status:
+         test = self.clipboard.text("plain", QtGui.QClipboard.Selection)
+         if test != "" and test != self.mainwindow.lineEdit.text():
+            self.widget.Translate()
+            self.cursor = QtGui.QCursor.pos()
+            self.widget.setGeometry(self.cursor.x(), self.cursor.y(), 300, 200)
+            self.widget.show()
 
 if __name__ == "__main__":
-
-   def display_widget():
-      if Lindict.real_time_status:
-         test = Lin_clipboard.text("plain",QtGui.QClipboard.Selection)
-         if test != "" and test != Lindict.lineEdit.text():
-            widget.Translate()
-            cursor = QtGui.QCursor.pos()
-            widget.setGeometry(cursor.x(), cursor.y(), 300, 200)
-           # widget.setFocusPolicy(QtCore.Qt.NoFocus)
-            #widget.show()
-           # widget.setAttribute(QtCore.Qt.WA_ShowWithoutActivating, False)
-            widget.show()
-         #   widget.setAttribute(QtCore.Qt.WA_ShowWithoutActivating)
-
+   
    app = QtGui.QApplication(sys.argv)
-   Lin_clipboard = QtGui.QApplication.clipboard()
-   Lin_clipboard.selectionChanged.connect(display_widget)
-   Lindict = MainWindow()
-   widget = Lin_Widget()
+   Lindict = Lindict()
    reload(sys)
    sys.setdefaultencoding('utf-8')
-   Lindict.show()
    sys.exit(app.exec_())

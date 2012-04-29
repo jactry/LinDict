@@ -9,7 +9,7 @@ from PyQt4.QtCore import Qt, SIGNAL
 from PyQt4.QtGui import *
 from PyQt4 import QtGui, QtCore
 
-class Lin_Widget(QtGui.QWidget):
+class LinWidget(QtGui.QWidget):
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
     
