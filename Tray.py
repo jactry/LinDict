@@ -3,7 +3,7 @@
 
 from PyQt4 import QtGui, QtCore
 
-class Lin_Tray(QtGui.QSystemTrayIcon):
+class LinTray(QtGui.QSystemTrayIcon):
     def __init__(self,parent = None):
         QtGui.QSystemTrayIcon.__init__(self,parent)
         self.icon = QtGui.QIcon("./youdao.png")

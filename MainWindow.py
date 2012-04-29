@@ -6,7 +6,7 @@ from PyQt4.QtGui import *
 from PyQt4 import QtGui, QtCore
 
 from ui_main import Ui_Form
-from Tray import Lin_Tray
+from Tray import LinTray
 from CloseWindow import CloseDialog
 
 #from Xlib import X, XK, display
@@ -41,18 +41,16 @@ class MainWindow(QWidget, Ui_Form):
 
 
     def get_word_list(self,model):
-	file = open('./word.bok')
-	line = file.read()
-	index = 0
+	file = open('./word.ldc',"r")
 	word_list = []
-	while index < 4614 :
-		where1 = line.find("[W]") + 3
-		where2 = line.find("[T]")
-		word = line[where1:where2]
-		where2 = where2 + 2
-		line = line[where2:]
-		index = index + 1
-		word_list.append(word)
+        for eachline in file:
+            word_list.append(eachline.strip())           
+	"""while index < 4611 :
+            word = file.readline()
+            print word
+            file.next()
+            word_list.append(word)
+            index = index + 1"""
 	file.close()
 
         model.setStringList(word_list)
@@ -72,7 +70,7 @@ class MainWindow(QWidget, Ui_Form):
         #self.real_time_action.setShortcutContext(Qt.ApplicationShortcut)
         self.quit_action = QtGui.QAction(u'退出', self, triggered = QtGui.qApp.quit)        
         self.real_time_action.setChecked(True)
-        self.tray = Lin_Tray(self)
+        self.tray = LinTray(self)
         self.tray_menu = QtGui.QMenu()
         self.tray_menu.addAction(self.hide_action)
         self.tray_menu.addAction(self.real_time_action)
