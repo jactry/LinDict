@@ -31,7 +31,7 @@ class LinWidget(QtGui.QWidget):
     def Translate(self):
 	myClipBoard = QtGui.QApplication.clipboard()
 	word = myClipBoard.text("plain",QtGui.QClipboard.Selection)      
-        word = word.toLower()
+        #word = word.toLower()
         result =Lookup.look_up(word)
         reload(sys)
         sys.setdefaultencoding('utf-8')

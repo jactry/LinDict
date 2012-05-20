@@ -28,6 +28,7 @@ class MainWindow(QWidget, Ui_Form):
 
         self.word_completer = QCompleter()
         self.lineEdit.setCompleter(self.word_completer)
+        self.word_completer.setCaseSensitivity(Qt.CaseInsensitive)
         model = QStringListModel()
         self.word_completer.setModel(model)
         self.get_word_list(model)
@@ -62,18 +63,25 @@ class MainWindow(QWidget, Ui_Form):
         else:
             self.setVisible(True)
 
+    def about_lindict(self):
+        QtGui.QMessageBox.about(self, u'关于 LinDict', u'LinDict by Jactry Zeng')
+        
+
             
     def creat_menu(self):
         self.hide_action = QtGui.QAction(u'显示/隐藏窗口', self, triggered = self.hide_or_display)
         self.real_time_action = QtGui.QAction(u'划词翻译', self, checkable = True, triggered = self.change_real_time_status)
         #self.real_time_action.setShortcut(QKeySequence('X'))
         #self.real_time_action.setShortcutContext(Qt.ApplicationShortcut)
+        self.about_action = QtGui.QAction(u'关于 Lindict', self, triggered = self.about_lindict)
         self.quit_action = QtGui.QAction(u'退出', self, triggered = QtGui.qApp.quit)        
         self.real_time_action.setChecked(True)
         self.tray = LinTray(self)
         self.tray_menu = QtGui.QMenu()
         self.tray_menu.addAction(self.hide_action)
         self.tray_menu.addAction(self.real_time_action)
+        self.tray_menu.addSeparator()
+        self.tray_menu.addAction(self.about_action)
         self.tray_menu.addSeparator()
         self.tray_menu.addAction(self.quit_action)        
         self.tray.setContextMenu(self.tray_menu)
@@ -188,4 +196,3 @@ class MainWindow(QWidget, Ui_Form):
                     print "Jactry" 
 
         self.record_dpy.record_enable_context(self.ctx, record_callback) """
-

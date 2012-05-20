@@ -47,17 +47,20 @@ def get_elements(xml, elem):
     return result
 
 def translate(word):
+    sword = str(word)
+    word = word.toLower()
     word = str(word)
     word = word.strip()
+    
    # print word
-    res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + str(word) + "</span>"
+    res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + sword + "</span>"
     if os.path.exists("./dictxml/"+word+".xml"):
         file_path = "./dictxml/"+word+".xml"
         #xml = urllib.urlopen(file_path, None, 0.5).read()
         xml = open(file_path).read()
     else:
         try:
-            xml = urllib2.urlopen("http://dict.yodao.com/search?keyfrom=dict.python&q="
+            xml = urllib2.urlopen("http://dict.yodao.com/search?keyfrom=lindict&q="
                                   + urllib.quote_plus(str(word)) + "&xmlDetail=true&doctype=xml",None,0.5).read();
         except:
             xml=None
@@ -67,7 +70,7 @@ def translate(word):
         if len(prou)>0:
             prou=get_text(prou[0])
             if len(prou)>0:
-                res+="<span style=\"font-size:15px; color:#2555B4>\">   ["+prou+"]</span>"
+                res+="<span style=\"font-size:15px; color:#0000b1;\">   ["+prou+"]</span>"
         res += "</p></center>"    
         
         #word form
