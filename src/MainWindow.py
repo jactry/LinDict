@@ -96,7 +96,7 @@ class MainWindow(QWidget, Ui_Form):
             self.real_time_status = True
             
     def translate(self):
-        res=Lookup.look_up(self.lineEdit.text())
+        res=Lookup.look_up(str(self.lineEdit.text()))
         reload(sys)
         sys.setdefaultencoding('utf-8')
         res=unicode(res)

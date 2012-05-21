@@ -48,11 +48,8 @@ def get_elements(xml, elem):
 
 def translate(word):
     sword = str(word)
-    word = word.toLower()
-    word = str(word)
+    word = str(word).lower()
     word = word.strip()
-    
-   # print word
     res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + sword + "</span>"
     if os.path.exists("./dictxml/"+word+".xml"):
         file_path = "./dictxml/"+word+".xml"

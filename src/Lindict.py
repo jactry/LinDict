@@ -19,7 +19,8 @@ class Lindict():
    def display_widget(self):
       if self.mainwindow.real_time_status:
          test = self.clipboard.text("plain", QtGui.QClipboard.Selection)
-         if test != "" and test != self.mainwindow.lineEdit.text():
+         test = str(test).strip()
+         if test != self.mainwindow.lineEdit.text():
             self.widget.Translate()
             self.cursor = QtGui.QCursor.pos()
             self.widget.setGeometry(self.cursor.x(), self.cursor.y(), 300, 200)
