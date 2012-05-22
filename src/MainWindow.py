@@ -38,7 +38,8 @@ class MainWindow(QWidget, Ui_Form):
         self.move_to_center()
         self.creat_menu()
         #self.hotkey()
-        
+        htmlfile = open("./index.html")
+        self.textEdit.append(self.tr(htmlfile.read()))
 
 
     def get_word_list(self,model):
