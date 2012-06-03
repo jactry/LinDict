@@ -1,10 +1,9 @@
 #! /usr/bin/python
-# -*- coding: utf-8 -*-
+# coding=gbk
 import re
 import urllib
 import urllib2
 import sys
-import os
 
 def look_up(word):    
     res = translate(word)
@@ -47,27 +46,19 @@ def get_elements(xml, elem):
     return result
 
 def translate(word):
-    sword = str(word)
-    word = str(word).lower()
-    word = word.strip()
-    res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + sword + "</span>"
-    if os.path.exists("./dictxml/"+word+".xml"):
-        file_path = "./dictxml/"+word+".xml"
-        #xml = urllib.urlopen(file_path, None, 0.5).read()
-        xml = open(file_path).read()
-    else:
-        try:
-            xml = urllib2.urlopen("http://dict.yodao.com/search?keyfrom=lindict&q="
-                                  + urllib.quote_plus(str(word)) + "&xmlDetail=true&doctype=xml",None,0.5).read();
-        except:
-            xml=None
+    res = u"<div style=\"font-family:Œ¢»Ì—≈∫⁄\"><center><p><span style=\"font-size:25px; color:#f00;\">" + str(word) + "</span>"
+    try:
+        xml = urllib2.urlopen("http://dict.yodao.com/search?keyfrom=dict.python&q="
+            + urllib.quote_plus(str(word)) + "&xmlDetail=true&doctype=xml",None,0.5).read();
+    except:
+        xml=None
     if xml!=None:
         #prounounce
         prou=get_elements(xml, "phonetic-symbol")
         if len(prou)>0:
             prou=get_text(prou[0])
             if len(prou)>0:
-                res+="<span style=\"font-size:15px; color:#0000b1;\">   ["+prou+"]</span>"
+                res+="<span style=\"font-size:15px>\">   ["+prou+"]</span>"
         res += "</p></center>"    
         
         #word form
@@ -103,7 +94,7 @@ def translate(word):
         jin_word= get_elements(jinshan, "pos")
         jin_word_b=get_elements(jinshan, "acceptation")
         if len(jin_word)>0:
-            res+=u"<p style=\"color:#2555B4\">≈ì√∞√â≈ì≈Ω√ä¬∞√î</p><ul>"
+            res+=u"<p style=\"color:#2555B4\">Ω…Ω¥ ∞‘</p><ul>"
             for i in range(0,len(jin_word)):
                 res+="<li>"+get_text(jin_word[i])+" "
                 res+=get_text(jin_word_b[i])+"</li>"
@@ -113,7 +104,7 @@ def translate(word):
     if xml!=None:
         yodao_translations = get_elements(xml, "yodao-web-dict")
         if len(yodao_translations)>0:
-            res+=u"<p style=\"color:#2555B4\">ËØçÁªÑ</p><ul>"        
+            res+=u"<p style=\"color:#2555B4\">¥ ◊È</p><ul>"        
             for trans in yodao_translations:
                 webtrans = get_elements(trans, "web-translation")
                 for web in webtrans[0:50]:
@@ -129,7 +120,7 @@ def translate(word):
     if jinshan!=None:
         sents=get_elements(jinshan, "sent") 
         if len(sents)>0: 
-            res+=u"<p style=\"color:#2555B4\">√è¬∞√ì√Ø</p><ul>"
+            res+=u"<p style=\"color:#2555B4\">œ∞”Ô</p><ul>"
             for sent in sents:
                 res+="<li>"+get_text(get_elements(sent, "orig")[0])
                 res+="<br/>"+get_text(get_elements(sent, "trans")[0])+"</li>"
@@ -139,7 +130,7 @@ def translate(word):
     if xml!=None:
         sents=get_elements(xml, "sentence-pair")
         if len(sents)>0:
-            res+=u"<p style=\"color:#2555B4\">Âè•Â≠ê</p><ul>" 
+            res+=u"<p style=\"color:#2555B4\">æ‰◊”</p><ul>" 
             for sent in sents:
                 res+="<li>"+get_text(get_elements(sent, "sentence")[0])
                 res+="<br/>"+get_text(get_elements(sent, "sentence-translation")[0])+"</li>"
