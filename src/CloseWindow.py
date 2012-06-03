@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ##########################################################################
 #  Copyright (C) 2012 by Jactry Zeng                                     #
 #                                                                        #
@@ -14,9 +17,6 @@
 #  You should have received a copy of the GNU General Public License     #
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>. #
 ##########################################################################
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from PyQt4 import QtGui, QtCore
 from ui_close import Ui_Dialog
