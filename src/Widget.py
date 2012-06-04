@@ -32,7 +32,7 @@ class LinWidget(QtGui.QWidget):
         QtGui.QWidget.__init__(self, parent)
     
         self.setGeometry(400,400,300,200)
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.Tool | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setBackgroundRole(19)
 
         gl =QtGui.QGridLayout()
@@ -49,7 +49,6 @@ class LinWidget(QtGui.QWidget):
     def Translate(self):
 	myClipBoard = QtGui.QApplication.clipboard()
 	word = myClipBoard.text("plain",QtGui.QClipboard.Selection)      
-        #word = word.toLower()
         result =Lookup.look_up(word)
         reload(sys)
         sys.setdefaultencoding('utf-8')
