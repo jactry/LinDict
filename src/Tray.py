@@ -21,7 +21,7 @@
 from PyQt4 import QtGui, QtCore
 
 class LinTray(QtGui.QSystemTrayIcon):
-    def __init__(self,parent = None):
+    def __init__(self, parent):
         QtGui.QSystemTrayIcon.__init__(self,parent)
         self.icon = QtGui.QIcon("./youdao.png")
         self.setIcon(self.icon)

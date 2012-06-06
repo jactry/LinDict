@@ -25,14 +25,15 @@ from PyQt4.QtCore import Qt, SIGNAL
 
 
 class CloseDialog(QDialog, Ui_Dialog):
-    def __init__(self,parent):
-        QtGui.QDialog.__init__(self)
+    def __init__(self, parent):
+        QtGui.QDialog.__init__(self, parent)
         self.setupUi(self)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         self.connect(self.tray_RBtn, SIGNAL("clicked()"), self.check_RBtn)
         self.connect(self.exit_RBtn, SIGNAL("clicked()"), self.check_RBtn)
         self.connect(self.ok_Btn, SIGNAL("clicked()"), self.press_ok)
         self.connect(self.cancel_Btn, SIGNAL("clicked()"), self.press_cancel)
-        #return self.result()
+        
         
         
     def check_RBtn(self):

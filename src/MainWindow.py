@@ -64,12 +64,6 @@ class MainWindow(QWidget, Ui_Form):
 	word_list = []
         for eachline in file:
             word_list.append(eachline.strip())           
-	"""while index < 4611 :
-            word = file.readline()
-            print word
-            file.next()
-            word_list.append(word)
-            index = index + 1"""
 	file.close()
 
         model.setStringList(word_list)
@@ -132,14 +126,7 @@ class MainWindow(QWidget, Ui_Form):
         #    self.change_real_time_status()
             
     def closeEvent(self, event):
-        """close_dialog = QtGui.QMessageBox.question(self, u'Lindict-关闭窗口', u'程序将缩小到托盘？', QtGui.QMessageBox.Yes, QtGui.QMessageBox.No, QtGui.QMessageBox.Cancel)
-        if close_dialog == QtGui.QMessageBox.Yes :
-            event.ignore()
-            self.hide_or_display()
-        elif close_dialog == QtGui.QMessageBox.No :
-            QtGui.qApp.quit
-        elif close_dialog == QtGui.QMessageBox.Cancel :
-            event.ignore()"""
+        event.ignore()
         close_state = Configure.read_config()
         if close_state == '0':
             self.hide_or_display()
@@ -147,7 +134,7 @@ class MainWindow(QWidget, Ui_Form):
             QtGui.qApp.quit()
         else:
             self.close_dialog = CloseDialog(self)
-            self.close_dialog.setModal(True)
+            self.close_dialog.setModal(False)
             self.jiajia = self.close_dialog.exec_()
             Configure.write_config(self.jiajia)
             if self.jiajia == 0 :
@@ -166,8 +153,6 @@ class MainWindow(QWidget, Ui_Form):
        # delete self.close_dialog
 	#self.close_dialog.exec()
 	#self.setEnabled(False)
-        
-	event.ignore()
     
     """
     def hotkey(self):

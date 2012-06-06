@@ -48,11 +48,8 @@ def get_elements(xml, elem):
 
 def translate(word):
     sword = str(word)
-    word = word.toLower()
-    word = str(word)
+    word = str(word).lower()
     word = word.strip()
-    
-   # print word
     res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + sword + "</span>"
     if os.path.exists("./dictxml/"+word+".xml"):
         file_path = "./dictxml/"+word+".xml"
@@ -102,6 +99,7 @@ def translate(word):
         jinshan = urllib2.urlopen("http://dict-co.iciba.com/api/dictionary.php?w="+urllib.quote_plus(str(word)),None,0.5).read()
     except:
         jinshan=None
+        """
     if jinshan!=None:
         jin_word= get_elements(jinshan, "pos")
         jin_word_b=get_elements(jinshan, "acceptation")
@@ -111,6 +109,7 @@ def translate(word):
                 res+="<li>"+get_text(jin_word[i])+" "
                 res+=get_text(jin_word_b[i])+"</li>"
             res+="</ul>"
+        """
         
     # phrase
     if xml!=None:
@@ -129,6 +128,7 @@ def translate(word):
             res+="</ul>"
     
     #jinshan sents
+    """
     if jinshan!=None:
         sents=get_elements(jinshan, "sent") 
         if len(sents)>0: 
@@ -137,6 +137,7 @@ def translate(word):
                 res+="<li>"+get_text(get_elements(sent, "orig")[0])
                 res+="<br/>"+get_text(get_elements(sent, "trans")[0])+"</li>"
             res+="</ul>"
+    """
         
     #sentence
     if xml!=None:
