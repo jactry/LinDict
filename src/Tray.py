@@ -18,11 +18,12 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>. #
 ##########################################################################
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
+
 
 class LinTray(QtGui.QSystemTrayIcon):
     def __init__(self, parent):
-        QtGui.QSystemTrayIcon.__init__(self,parent)
+        QtGui.QSystemTrayIcon.__init__(self, parent)
         self.icon = QtGui.QIcon("./youdao.png")
         self.setIcon(self.icon)
         self.Tray_Menu = QtGui.QMenu()

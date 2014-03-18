@@ -23,6 +23,7 @@ import os
 
 path = os.path.expanduser('~') + '/.config/.Lindict.cfg'
 
+
 def read_config():
     if os.path.exists(path):
 

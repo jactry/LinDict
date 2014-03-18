@@ -20,7 +20,7 @@
 
 from PyQt4.QtCore import Qt, SIGNAL
 from PyQt4.QtGui import *
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
 
 from ui_main import Ui_Form
 from Tray import LinTray
@@ -31,16 +31,15 @@ from CloseWindow import CloseDialog
 #from Xlib.protocol import rq
 
 import Lookup
-import commands
-import os
 import sys
 import Configure
+
 
 class MainWindow(QWidget, Ui_Form):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
-        self.connect(self.pushButton,SIGNAL("clicked()"),self.translate)
+        self.connect(self.pushButton, SIGNAL("clicked()"), self.translate)
         self.pushButton.setAutoDefault(True)
 
         self.word_completer = QCompleter()
@@ -51,24 +50,21 @@ class MainWindow(QWidget, Ui_Form):
         self.get_word_list(model)
 
         self.real_time_status = True
-        
         self.move_to_center()
         self.creat_menu()
         #self.hotkey()
         htmlfile = open("./template/index.html")
         self.textEdit.append(self.tr(htmlfile.read()))
 
-
-    def get_word_list(self,model):
-	file = open('./word.ldc',"r")
-	word_list = []
+    def get_word_list(self, model):
+        file = open('./word.ldc', "r")
+        word_list = []
         for eachline in file:
-            word_list.append(eachline.strip())           
-	file.close()
+            word_list.append(eachline.strip())
+        file.close()
 
         model.setStringList(word_list)
-        
-        
+
     def hide_or_display(self):
         if self.isVisible():
             self.hide()
@@ -77,16 +73,14 @@ class MainWindow(QWidget, Ui_Form):
 
     def about_lindict(self):
         QtGui.QMessageBox.about(self, u'关于 LinDict', u'LinDict by Jactry Zeng')
-        
 
-            
     def creat_menu(self):
-        self.hide_action = QtGui.QAction(u'显示/隐藏窗口', self, triggered = self.hide_or_display)
-        self.real_time_action = QtGui.QAction(u'划词翻译', self, checkable = True, triggered = self.change_real_time_status)
+        self.hide_action = QtGui.QAction(u'显示/隐藏窗口', self, triggered=self.hide_or_display)
+        self.real_time_action = QtGui.QAction(u'划词翻译', self, checkable=True, triggered=self.change_real_time_status)
         #self.real_time_action.setShortcut(QKeySequence('X'))
         #self.real_time_action.setShortcutContext(Qt.ApplicationShortcut)
-        self.about_action = QtGui.QAction(u'关于 Lindict', self, triggered = self.about_lindict)
-        self.quit_action = QtGui.QAction(u'退出', self, triggered = QtGui.qApp.quit)        
+        self.about_action = QtGui.QAction(u'关于 Lindict', self, triggered=self.about_lindict)
+        self.quit_action = QtGui.QAction(u'退出', self, triggered=QtGui.qApp.quit)
         self.real_time_action.setChecked(True)
         self.tray = LinTray(self)
         self.tray_menu = QtGui.QMenu()
@@ -95,36 +89,36 @@ class MainWindow(QWidget, Ui_Form):
         self.tray_menu.addSeparator()
         self.tray_menu.addAction(self.about_action)
         self.tray_menu.addSeparator()
-        self.tray_menu.addAction(self.quit_action)        
+        self.tray_menu.addAction(self.quit_action)
         self.tray.setContextMenu(self.tray_menu)
         self.tray.show()
 
     def change_real_time_status(self):
-        if self.real_time_status :
+        if self.real_time_status:
             self.real_time_action.setChecked(False)
             self.real_time_status = False
         else:
             self.real_time_action.setChecked(True)
             self.real_time_status = True
-            
+
     def translate(self):
-        res=Lookup.look_up(self.lineEdit.text())
+        res = Lookup.look_up(self.lineEdit.text())
         reload(sys)
         sys.setdefaultencoding('utf-8')
-        res=unicode(res)
+        res = unicode(res)
         self.textEdit.setText(res)
 
     def move_to_center(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
-        self.move((screen.width() - size.width())/2,(screen.height() - size.height())/2)
-        
+        self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
+
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Return and self.lineEdit.text() != "":
             self.translate()
         #elif event.modifiers() == Qt.ControlModifier and event.key() == Qt.Key_S:
         #    self.change_real_time_status()
-            
+
     def closeEvent(self, event):
         event.ignore()
         close_state = Configure.read_config()
@@ -137,23 +131,21 @@ class MainWindow(QWidget, Ui_Form):
             self.close_dialog.setModal(False)
             self.jiajia = self.close_dialog.exec_()
             Configure.write_config(self.jiajia)
-            if self.jiajia == 0 :
+            if self.jiajia == 0:
                 self.hide_or_display()
                 #self.ask_next_time = False
-            elif self.jiajia == 1 :
+            elif self.jiajia == 1:
                 self.hide_or_display()
                 #self.ask_next_time = True
-            elif self.jiajia == 2 :
+            elif self.jiajia == 2:
                 self.ask_next_time = False
                 QtGui.qApp.quit()
-            elif self.jiajia == 3 :
+            elif self.jiajia == 3:
                 self.ask_next_time = True
                 QtGui.qApp.quit()
-            
        # delete self.close_dialog
-	#self.close_dialog.exec()
-	#self.setEnabled(False)
-    
+            #self.close_dialog.exec()
+            #self.setEnabled(False)
     """
     def hotkey(self):
 
@@ -196,6 +188,6 @@ class MainWindow(QWidget, Ui_Form):
                 keysym = self.record_dpy.keycode_to_keysym(event.detail, 0)
                 if lookup_keysym(keysym) == "F8":
                     self.change_real_time_status
-                    print "Jactry" 
+                    print "Jactry"
 
         self.record_dpy.record_enable_context(self.ctx, record_callback) """

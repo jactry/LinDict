@@ -1,18 +1,16 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
-import re
-import urllib
-import urllib2
-import sys
-import os
+
 from en_engine import en_dictionary
 from fanyi_engine import fanyi_dictionary
+
 
 def look_up(word):
     mydictionary = en_dictionary(str(word))
     myfanyi = fanyi_dictionary(str(word))
     res = translate(mydictionary, myfanyi)
     return res
+
 
 def translate(mydictionary, myfanyi):
     res = """<html>
@@ -24,7 +22,7 @@ def translate(mydictionary, myfanyi):
     """
     res += "<center><h2><div class=\"keyword\">" + str(mydictionary.return_phrase) + "</div></h2>"
     if mydictionary.phonetic_symbol:
-        res+="<div class=\"phonetic\"> ["+ str(mydictionary.phonetic_symbol) + "] </div>"
+        res += "<div class=\"phonetic\"> [" + str(mydictionary.phonetic_symbol) + "] </div>"
     res += "</center>"
 
     if mydictionary.cn_translation:
@@ -36,8 +34,8 @@ def translate(mydictionary, myfanyi):
     word_forms = mydictionary.word_forms()
     if word_forms:
         res += "<center><div class=\"additional\">["
-        for x in word_forms.keys():    
-            res +=  str(x) + ": " + word_forms[x] + " "
+        for x in word_forms.keys():
+            res += str(x) + ": " + word_forms[x] + " "
         res += "]</div></center>"
 
     web_explains = myfanyi.web_explains()
@@ -49,7 +47,6 @@ def translate(mydictionary, myfanyi):
                 res += value
             res += "</li>"
         res += "</ul>"
- 
     example_sentences = mydictionary.example_sentence()
     if example_sentences:
         res += "<h3>例句：</h3><ol>"

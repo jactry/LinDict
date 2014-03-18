@@ -3,6 +3,7 @@
 
 import os
 
+
 def build():
     os.system("pyuic4 -o ui_main.py ./ui/ui_main.ui")
     print "pyuic4 -o ui_main.py ./ui/ui_main.ui"
