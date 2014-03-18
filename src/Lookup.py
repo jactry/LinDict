@@ -15,29 +15,36 @@ def look_up(word):
     return res
 
 def translate(mydictionary, myfanyi):
-    res = u"<div style=\"font-family:Ubuntu\"><center><p><span style=\"font-size:25px; font-weight:bold; color:#000;\">" + str(mydictionary.return_phrase) + "</span>"
+    res = """<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="resrc/styles/base.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    """
+    res += "<center><h2><div class=\"keyword\">" + str(mydictionary.return_phrase) + "</div></h2>"
     if mydictionary.phonetic_symbol:
-        res+="<span style=\"font-size:15px; color:#0000b1;\">   ["+ str(mydictionary.phonetic_symbol) +"]</span>"
-    res += "</p></center>"
+        res+="<div class=\"phonetic\"> ["+ str(mydictionary.phonetic_symbol) + "] </div>"
+    res += "</center>"
 
     if mydictionary.cn_translation:
-        res += "<ul>"
+        res += "<div class=\"trans-container\"><h4><ul>"
         for trans in mydictionary.cn_translation:
             res += "<li>" + str(trans) + "</li>"
-        res += "</ul>"
+        res += "</ul></h4></div>"
 
     word_forms = mydictionary.word_forms()
     if word_forms:
-        res += "变形：<ul>"
+        res += "<center><div class=\"additional\">["
         for x in word_forms.keys():    
-            res += "<li>" + str(x) + ": " + word_forms[x] + "</li>"
-        res += "</ul>"
+            res +=  str(x) + ": " + word_forms[x] + " "
+        res += "]</div></center>"
 
     web_explains = myfanyi.web_explains()
     if web_explains:
-        res += "词组：<ul>"
+        res += "<h3>词组：</h3><ul>"
         for explain in web_explains.keys():
-            res += "<li>" + explain + ": "
+            res += "<li><div class=\"contentTitle\">" + explain + ": </div>"
             for value in web_explains[explain]:
                 res += value
             res += "</li>"
@@ -45,8 +52,8 @@ def translate(mydictionary, myfanyi):
  
     example_sentences = mydictionary.example_sentence()
     if example_sentences:
-        res += "例句：<ul>"
+        res += "<h3>例句：</h3><ol>"
         for x in example_sentences.keys():
             res += "<li>" + str(x) + "<br>" + str(example_sentences[x]) + "</li>"
-        res += "</ul>"
+        res += "</ol></hbody></html>"
     return res

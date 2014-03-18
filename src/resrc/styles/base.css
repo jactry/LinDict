@@ -1,0 +1,54 @@
+body {
+    padding: 0;
+    margin: 0;
+    background:transparent url(./src/styles/images/bg.png) repeat fixed;
+    font-size: 14px;
+    font-family: Arial,sans-serif;
+    color: #434343;
+    line-height: 24px;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.keyword {
+    vertical-align: bottom;
+    margin-right: 15px;
+}
+
+.phonetic {
+    font-family: "lucida sans unicode",arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+    margin: 0 .1em;
+}
+
+.trans-container {
+    margin: 1em 0 2em 0;
+    color: #000;
+}
+
+.contentTitle {
+    font-weight: bold;
+    color: #35a1d4;
+    margin-right: .5em;
+}
+
+.additional {
+    color: #959595;
+    font-size: 13px;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    color: #000;
+}
