@@ -13,6 +13,8 @@ def look_up(word):
 
 
 def translate(mydictionary, myfanyi):
+    if not mydictionary.return_phrase:
+        return 0
     res = """<html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />

@@ -19,7 +19,7 @@
 ##########################################################################
 
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from MainWindow import MainWindow
 from Widget import LinWidget
 
@@ -31,6 +31,7 @@ class Lindict():
         self.mainwindow.show()
         self.widget = LinWidget()
         self.clipboard.selectionChanged.connect(self.display_widget)
+        QtCore.QTextCodec.setCodecForTr(QtCore.QTextCodec.codecForName("utf8"))
 
     def display_widget(self):
         if self.mainwindow.real_time_status:

@@ -53,8 +53,9 @@ class MainWindow(QWidget, Ui_Form):
         self.move_to_center()
         self.creat_menu()
         #self.hotkey()
-        htmlfile = open("./template/index.html")
-        self.textEdit.append(self.tr(htmlfile.read()))
+        htmlfile = open("./template/index.html", 'r')
+        self.textEdit.setText(self.tr(htmlfile.read()))
+        htmlfile.close()
 
     def get_word_list(self, model):
         file = open('./word.ldc', "r")
@@ -103,10 +104,15 @@ class MainWindow(QWidget, Ui_Form):
 
     def translate(self):
         res = Lookup.look_up(self.lineEdit.text())
-        reload(sys)
-        sys.setdefaultencoding('utf-8')
-        res = unicode(res)
-        self.textEdit.setText(res)
+        if not res:
+            htmlfile = open("./template/404.html", 'r')
+            self.textEdit.setText(self.tr(htmlfile.read()))
+            htmlfile.close()
+        else:
+            reload(sys)
+            sys.setdefaultencoding('utf-8')
+            res = unicode(res)
+            self.textEdit.setText(res)
 
     def move_to_center(self):
         screen = QDesktopWidget().screenGeometry()

@@ -49,10 +49,15 @@ class LinWidget(QtGui.QWidget):
         myClipBoard = QtGui.QApplication.clipboard()
         word = myClipBoard.text("plain", QtGui.QClipboard.Selection)
         result = Lookup.look_up(word)
-        reload(sys)
-        sys.setdefaultencoding('utf-8')
-        unicode(result)
-        self.textedit.setText(result)
+        if not result:
+            htmlfile = open("./template/404.html", 'r')
+            self.textedit.setText(self.tr(htmlfile.read()))
+            htmlfile.close()
+        else:
+            reload(sys)
+            sys.setdefaultencoding('utf-8')
+            unicode(result)
+            self.textedit.setText(result)
 
     def leaveEvent(self, event):
         self.close()
