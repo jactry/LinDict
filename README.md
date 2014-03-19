@@ -5,7 +5,7 @@ LinDitc——dictionary for Linux!
 
 ### 引(pa)擎(chong)
 
-ldict: [https://gitcafe.com/Jactry/ldict](https://gitcafe.com/Jactry/ldict)
+ldict: [https://github.com/Jactry/ldict](https://github.com/Jactry/ldict)
 
 ### 截图
 
