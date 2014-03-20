@@ -44,6 +44,10 @@ class LinWidget(QtGui.QWidget):
         gl.addWidget(self.textedit, 3, 0, 5, 2)
         self.setLayout(gl)
         self.setAttribute(Qt.WA_X11DoNotAcceptFocus, True)
+        pl = self.textedit.palette()
+        pl.setBrush(QPalette.Base, QBrush(QColor(255, 0, 0, 0)));
+        self.textedit.setPalette(pl);
+        self.textedit.setFrameShape(QFrame.NoFrame)
 
     def Translate(self):
         myClipBoard = QtGui.QApplication.clipboard()
